@@ -1,33 +1,17 @@
 package com.itmuch.cloud.entity;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
 public class User {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column
   private String username;
 
-  @Column
   private String name;
 
-  @Column
   private Short age;
 
-  @Column
   private BigDecimal balance;
-
-  public User() {
-  }
-
-  public User(Long id,String username) {
-    this.id = id;
-    this.username = username;
-  }
 
   public Long getId() {
     return this.id;
@@ -68,4 +52,5 @@ public class User {
   public void setBalance(BigDecimal balance) {
     this.balance = balance;
   }
+
 }
