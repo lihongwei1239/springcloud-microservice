@@ -1,6 +1,12 @@
 spring:
   application:
     name: eureka-ha
+security:
+  basic:
+    enabled: true
+  user:
+    name: user
+    password: password123
 ---
 server:
   port: 8761
@@ -9,9 +15,11 @@ spring:
 eureka:
   instance:
     hostname: peer1
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
   client:
     serviceUrl:
-      defaultZone: http://peer2:8762/eureka/,http://peer3:8763/eureka/
+      defaultZone: http://user:password123@peer2:8762/eureka/,http://user:password123@peer3:8763/eureka/
   dashboard:
     enabled: true
     path: /ha
@@ -23,9 +31,11 @@ spring:
 eureka:
   instance:
     hostname: peer2
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://peer1:8761/eureka/,http://peer3:8763/eureka/
+      defaultZone: http://user:password123@peer1:8761/eureka/,http://user:password123@peer3:8763/eureka/
   dashboard:
     enabled: false
 ---
@@ -36,8 +46,10 @@ spring:
 eureka:
   instance:
     hostname: peer3
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
   client:
     serviceUrl:
-      defaultZone: http://peer1:8761/eureka/,http://peer2:8762/eureka/
+      defaultZone: http://user:password123@peer1:8761/eureka/,http://user:password123@peer2:8762/eureka/
   dashboard:
     enabled: false
