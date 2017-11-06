@@ -17,6 +17,9 @@ eureka:
 logging:
   level:
     com.itmuch.cloud.feign: DEBUG
+feign:
+  hystrix:
+    enabled: true
 # 解决第一次请求报超时异常的方案：
 hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 5000
 # 或者：
@@ -26,6 +29,3 @@ hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 5000
 # 超时的issue：https://github.com/spring-cloud/spring-cloud-netflix/issues/768
 # 超时的解决方案： http://stackoverflow.com/questions/27375557/hystrix-command-fails-with-timed-out-and-no-fallback-available
 # hystrix配置： https://github.com/Netflix/Hystrix/wiki/Configuration#execution.isolation.thread.timeoutInMilliseconds
-feign:
-  hystrix:
-    enabled: true

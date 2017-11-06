@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableEurekaClient
 @EnableFeignClients
 @EnableCircuitBreaker
-public class MicroserviceConsumerMovieFeignApplication {
+public class MicroserviceConsumerMovieFeignHystrixApplication {
 
 	@Bean
 	public RestTemplate restTemplate(){
@@ -20,8 +20,6 @@ public class MicroserviceConsumerMovieFeignApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(MicroserviceConsumerMovieFeignApplication.class, args);
+		SpringApplication.run(MicroserviceConsumerMovieFeignHystrixApplication.class, args);
 	}
-
-
 }

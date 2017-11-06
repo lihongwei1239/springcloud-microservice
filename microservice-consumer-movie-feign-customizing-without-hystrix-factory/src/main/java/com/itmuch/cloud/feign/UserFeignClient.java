@@ -8,17 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "microservice-provider-user",fallback = HystrixClientFallback.class)
+@FeignClient(value = "microservice-provider-user",configuration = FooConfiguration.class,fallbackFactory = HystrixClientFactory2.class)
 public interface UserFeignClient {
 
     @RequestMapping(method = RequestMethod.GET,value = "/simple/{id}")
     User findById(@PathVariable("id") Long id);
-
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
-    User postUser(@RequestBody User user);
-
-    @RequestMapping(value = "/get-user", method = RequestMethod.GET)
-    User getUser(User user);
 
 
 }
