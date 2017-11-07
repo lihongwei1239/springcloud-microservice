@@ -1,5 +1,6 @@
 server:
   port: 7802
+  context-path: /ribbon
 user:
   userServicePath: http://localhost:7900/simple/
 spring:
