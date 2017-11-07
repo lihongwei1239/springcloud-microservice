@@ -1,0 +1,23 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-hystrix-turbine3
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    lease-renewal-interval-in-seconds: 5
+turbine:
+  aggregator:
+    clusterConfig: MICROSERVICE-CONSUMER-MOVIE-RIBBON-WITH-HYSTRIX3
+  appConfig: microservice-consumer-movie-ribbon-with-hystrix3
+logging:
+  level:
+    root: INFO
+    com.netflix.turbine.monitor: DEBUG
