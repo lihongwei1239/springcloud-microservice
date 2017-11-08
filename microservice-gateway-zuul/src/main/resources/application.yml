@@ -1,0 +1,33 @@
+server:
+  port: 10000
+spring:
+  application:
+    name: microservice-gateway-zuul
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    lease-renewal-interval-in-seconds: 5
+
+zuul:
+  routes:
+    users:
+     path: /users/**
+     serviceId: microservice-provider-user
+
+ribbon:
+  eureka:
+    enabled: false
+
+microservice-provider-user:
+  ribbon:
+    listOfServers: http://localhost:7900/,http://localhost:7901/
+
+logging:
+  level:
+    com.netflix: DEBUG
